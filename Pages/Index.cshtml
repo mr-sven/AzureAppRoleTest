@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@foreach (var ident in User.Identities)
+{
+    <p>Identity RoleClaimType: <strong>@ident.RoleClaimType</strong> used for <strong>User.IsInRole(rolename)</strong></p>
+    <p>Claims:</p>
+    <p>
+    @foreach (var claim in ident.Claims)
+    {
+         <strong>@claim.Type:</strong> @claim.Value<br />
+    }
+    </p>
+}
