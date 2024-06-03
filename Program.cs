@@ -12,7 +12,7 @@ JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
 // add Azure AD Authentication with Distributed cache
 builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration)
-        .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read" })
+        .EnableTokenAcquisitionToCallDownstreamApi(["user.read"])
         .AddInMemoryTokenCaches();
 
 // configure Open ID claims
@@ -36,6 +36,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStatusCodePagesWithReExecute("/StatusCode", "?statusCode={0}");
 
 app.UseRouting();
 
